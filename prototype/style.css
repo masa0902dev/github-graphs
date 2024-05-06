@@ -1,0 +1,17 @@
+body {
+  text-align: center;
+}
+
+#result .total {
+  font-size: 1.5em;
+  margin: 1em 0;
+}
+#result .color-description-wrapper {
+  margin: 1em 0;
+  background: green;
+}
+#result table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

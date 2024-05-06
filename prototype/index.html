@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>GitHub Contributions</title>
+
+        <!-- css -->
+        <link rel="stylesheet" href="style.css">
+        <!-- js -->
+        <script type="module" src="index.js" defer></script>
+    </head>
+
+    <body>
+        <h1>GitHub Contribution-Graph</h1>
+        <input type="text" id="username" placeholder="Enter GitHub username" value="masa0902dev">
+        <select id="period">
+            <option value="6">6 months</option>
+            <option value="12">1 years</option>
+        </select>
+        <button onclick="fetchContributions()">Check Contributions</button>
+        <div id="result">
+            <div class="color-description-wrapper">
+
+            </div>
+        </div>
+
+    </body>
+</html>
