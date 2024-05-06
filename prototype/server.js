@@ -1,8 +1,10 @@
 import express from "express";
 import fetch from "node-fetch";
 import { config } from "dotenv";
-config(); // load .env file
 import cors from 'cors'; // only dev environment (3000 vs 5500)
+// load .env file 
+// dont use before finish imports. it will not work.
+config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;

@@ -13,47 +13,61 @@
     </head>
 
     <body>
-        <h1>GitHub Contribution-Graphs</h1>
-        <input type="text" id="username" placeholder="username (id)" autocomplete="username">
-        <select id="period">
-            <option value="6">6 months</option>
-            <option value="12">1 years</option>
-        </select>
-        <input type="button" id="count-contribution" value="Check Contributions">
-        
-        <div class="color-description-wrapper">
-            <div class="flex-wrapper">
-                <div class="item"><span></span><p>1~4</p></div>
-                <div class="item"><span></span><p>5~9</p></div>
-                <div class="item"><span></span><p>10~14</p></div>
+        <main>
+            <h1>GitHub Contribution Graphs</h1>
+            <div class="input-wrapper">
+                <input type="text" id="username" value="masa0902dev" placeholder="username (id)" autocomplete="username">
+                <select id="period">
+                    <option value="3">3 months</option>
+                    <option value="6" selected>6 months</option>
+                    <option value="9">9 months</option>
+                    <option value="12">1 years</option>
+                </select>
+                <input type="button" id="count-contribution" value="Get Contributions">
             </div>
-            <div class="flex-wrapper">
-                <div class="item"><span></span><p>15~19</p></div>
-                <div class="item"><span></span><p>20~24</p></div>
-                <div class="item"><span></span><p>25~29</p></div>
+            
+            <div id="result-wrapper">
+                <!-- <p class="total"></p>
+                <p class="username"></p>
+                <p class="period"></p>
+                <div class="table-wrapper"></div> -->
             </div>
-            <div class="flex-wrapper">
-                <div class="item"><span></span><p>30~34</p></div>
-                <div class="item"><span></span><p>35~39</p></div>
-                <div class="item"><span></span><p>40~44</p></div>
-            </div>
-            <div class="flex-wrapper">
-                <div class="item"><span></span><p>45~49</p></div>
-                <div class="item"><span></span><p>50~54</p></div>
-                <div class="item"><span></span><p>55~59</p></div>
-            </div>
-            <div class="flex-wrapper">
-                <div class="item" style="display:none;"></div>
-                <div class="item" style="display:none;"></div>
-                <div class="item"><span></span><p>60~</p></div>
-            </div>
-        </div>
 
-        <div id="result">
-            <!-- <p class="total"></p>
-            <p class="period"></p>
-            <div class="table-wrapper"></div> -->
-        </div>
+            <div class="color-description-wrapper">
+                <div class="flex-wrapper">
+                    <div class="item"><span></span><p>1~4</p></div>
+                    <div class="item"><span></span><p>5~9</p></div>
+                    <div class="item"><span></span><p>10~14</p></div>
+                </div>
+                <div class="flex-wrapper">
+                    <div class="item"><span></span><p>15~19</p></div>
+                    <div class="item"><span></span><p>20~24</p></div>
+                    <div class="item"><span></span><p>25~29</p></div>
+                </div>
+                <div class="flex-wrapper">
+                    <div class="item"><span></span><p>30~34</p></div>
+                    <div class="item"><span></span><p>35~39</p></div>
+                    <div class="item"><span></span><p>40~44</p></div>
+                </div>
+                <div class="flex-wrapper">
+                    <div class="item"><span></span><p>45~49</p></div>
+                    <div class="item"><span></span><p>50~54</p></div>
+                    <div class="item"><span></span><p>55~59</p></div>
+                </div>
+                <div class="flex-wrapper">
+                    <div class="item" style="display:none;"></div>
+                    <div class="item" style="display:none;"></div>
+                    <div class="item"><span></span><p>60~</p></div>
+                </div>
+            </div>
+        </main>
 
+
+        <footer>
+            <div class="link-wrapper">
+                <p>Github: <a href="https://github.com/masa0902dev/github-contribution-graphs">github-contribution-graphs</a></p>
+                <p>Author: <a href="https://masa0902dev.notion.site/Tech-Blog-MASA-0f225d11627944d692699daf0686cd9e">masa0902dev</a></p>
+            </div>
+        </footer>
     </body>
 </html>

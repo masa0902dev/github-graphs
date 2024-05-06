@@ -1,11 +1,11 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const button = document.getElementById("count-contribution");
-    button.addEventListener("click", fetchContributions);
+document.addEventListener("DOMContentLoaded", async () => {
+    await fetchContributions();
 });
+
 async function fetchContributions() {
     const userName = document.getElementById("username").value;
     const period = document.getElementById("period").value;
-    console.log("userName:", userName, "\nperiod:", period, "months");
+    console.log("fetchContributions()\nuserName:", userName, "\nperiod:", period, "months");
     // TODO: fix the fetch URL for production environment
     const response = await fetch("http://localhost:3000/api/contributions", {
         method: "POST",
@@ -15,39 +15,57 @@ async function fetchContributions() {
         body: JSON.stringify({ userName, period }),
     });
     const data = await response.json();
-    // save data to localStorage
-    localStorage.setItem("data", JSON.stringify(data));
     RenderContributionGraph(data, period);
 }
 
-
 function RenderContributionGraph(data, period) {
-    const result = document.getElementById("result");
-    result.innerHTML = ""; // clear old data
-    console.log(data, period);
-    const weeks = data.user.contributionsCollection.contributionCalendar.weeks;
+    console.log("RenderContributionGraph()\ndata:", data, "\nperiod:", period);
+    if (data.errors) {
+        alert("Github GraphQL API message:\n\n" + data.errors[0].message);
+        return;
+    }
+    const weeks = data.data.user.contributionsCollection.contributionCalendar.weeks;
     const contributions = weeks.flatMap(week => week.contributionDays.map(day => day.contributionCount));
     const dates = weeks.flatMap(week => week.contributionDays.map(day => day.date));
+    
+    const totalContribution = contributions.reduce((acc, cur) => acc + cur, 0);
 
-    // total
-    const total = contributions.reduce((acc, cur) => acc + cur, 0);
-    result.innerHTML = `<p class="total">Total Contributions: ${total}</p>`;
+    const resultWrapper = document.getElementById("result-wrapper");
+    resultWrapper.innerHTML = ""; // clear old data
+    
+    const pTotal = document.createElement("p");
+    pTotal.className = "total";
+    pTotal.textContent = "Total Contributions: " + totalContribution;
+    resultWrapper.appendChild(pTotal);
+    const pPeriod = document.createElement("p");
+    pPeriod.className = "period";
+    const formattedPeriod = [
+        new Date(dates[0]).toLocaleDateString("en-US", { month: 'short', day: '2-digit', year: 'numeric' }),
+        new Date(dates[dates.length - 1]).toLocaleDateString("en-US", { month: 'short', day: '2-digit', year: 'numeric' })
+    ];
+    pPeriod.textContent = formattedPeriod[0] + " ~ " + formattedPeriod[1];
+    resultWrapper.appendChild(pPeriod);
+    const pName = document.createElement("p");
+    pName.className = "username";
+    pName.textContent = inputName.value;
+    resultWrapper.appendChild(pName);
     
     // make empty table
     const table = document.createElement("table");
-    // TODO: add "this year" period option
-    const numberOfCols = period === "6" ? 27 : 53;
+    // TODO: add  period option "this year"
+    let numberOfCols = parseInt(period) / 3 * 13 + 1;
     for (let i = 0; i < 7; i++) {
         const row = document.createElement("tr");
         for (let j = 0; j < numberOfCols; j++) {
             const cell = document.createElement("td");
+            cell.classList.add("tooltip");
             row.appendChild(cell);
         }
         table.appendChild(row);
     }
     const tableWrapper = document.createElement("div");
     tableWrapper.className = "table-wrapper";
-    result.appendChild(tableWrapper)
+    resultWrapper.appendChild(tableWrapper)
     tableWrapper.appendChild(table);
 
     // 1. check and fill the lack of days in the first week
@@ -65,7 +83,13 @@ function RenderContributionGraph(data, period) {
 
         let cell = table.rows[day].cells[weekCount];
         cell.style.background = getColor(contributions[i]);
-        cell.title = contributions[i] === undefined ? "" : contributions[i];
+        // add tooltip to display date and contribution count
+        const tooltipDescription = document.createElement("div");
+        tooltipDescription.classList.add("tooltip-description");
+        const formatOptions = { weekday: 'short', month: '2-digit', day: '2-digit', year: 'numeric' };
+        const formattedDate = new Date(dates[i]).toLocaleDateString("en-US", formatOptions);
+        tooltipDescription.textContent = formattedDate + ": " + contributions[i];
+        cell.appendChild(tooltipDescription);
 
         daysCount++;
         if (daysCount === 7) {
@@ -79,7 +103,6 @@ function RenderContributionGraph(data, period) {
         cell.style.background = getColor(0);
     }
 }
-
 
 function getColor(number) {
     const colors = [
@@ -101,14 +124,36 @@ function getColor(number) {
     for (let i = 0; i < colors.length; i++) {
         if (number === undefined || number === 0) {
             return colors[0];
-        } else if (number < i*5  && number >= (i-1)*5) {
+        } 
+
+        if (number < 20) {
+            if (number <= i*3 && number > (i-1)*3) {
+                return colors[i];
+            }
+        } else if (number < (i-6)*5 + 20  && number >= (i-7)*5 + 20) {
             return colors[i];
         }
 
-        if (number >= 60) {
+        if (number >= 50) {
             return colors[colors.length - 1];
         }
     }
 }
 
 
+
+const button = document.getElementById("count-contribution");
+const inputName = document.getElementById("username");
+const inputPeriod = document.getElementById("period");
+button.addEventListener("click", fetchContributions);
+inputName.addEventListener("keydown", clickButton);
+inputPeriod.addEventListener("keydown", clickButton);
+// click button when Enter key is pressed in username and period input
+function clickButton(e) {
+if (e.key === "Enter") {
+    button.dispatchEvent(new PointerEvent("click"));
+    e.preventDefault();
+}
+};
+// focus on the username input when the page is loaded
+inputName.focus();

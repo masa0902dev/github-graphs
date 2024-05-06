@@ -1,17 +1,142 @@
-body { 
-    text-align: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    font-family: Calibri、Candara、Segoe、Segoe UI、Optima、Arial、sans-serif;
-}
-p {
+* { // now dont use destyle.css
     margin: 0;
-}
-h1 {
-    font-size: 1.6rem;
-    font-weight: normal;
+    padding: 0;
 }
 
+body { 
+    position: relative;
+    text-align: center;
+    // XXX: footer item will be fixed at the bottom by this 1px
+    padding: 2rem .6rem 1px;
+    margin: 0;
+    overflow-x: hidden;
+    font-family: Calibri、Candara、Segoe、Segoe UI、Optima、Arial、sans-serif !important;
+}
+h1 {
+    font-size: 1.4rem;
+    font-weight: normal;
+    letter-spacing: -1px;
+}
+
+
+.input-wrapper {
+    margin-top: 1rem;
+    #username {
+        height: 1.2rem;
+        padding: .2rem;
+        font-size: 1.1rem;
+    }
+    #period {
+        // height: 1.2rem;
+        padding: .2rem;
+        font-size: 1.1rem;
+        cursor: pointer;
+    }
+    #count-contribution {
+        // height: 1.2rem;
+        padding: .4rem .8rem;
+        font-size: 1.1rem;
+        margin-left: .4rem;
+        margin-top: .4rem;
+        background: rgb(184, 184, 184);
+        color: white;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        @media (hover: hover) {
+            &:hover {
+                background: rgb(154, 154, 154);
+                transform: translateY(-1px);
+            }
+        }
+        &:active {
+            background: rgb(154, 154, 154);
+            transform: translateY(1px);
+        }
+    }
+}
+
+
+
+#result-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
+    .total {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+    .username {
+        font-size: 1.1rem;
+    }
+    .period {
+        font-size: 1rem;
+    }
+    .table-wrapper {
+        overflow-x: auto;
+        width: 95%;
+        &::-webkit-scrollbar {
+            width: .4rem;
+            height: .6rem;
+            // TODO: always show the scrollbar
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgb(185, 185, 185);
+            border-radius: 1rem;
+        }
+        &::-webkit-scrollbar-track {
+            background: rgb(225, 225, 225);
+            border-radius: 1rem;
+        }
+        table {
+            margin: 1.2rem auto .4rem;
+            table-layout: fixed;
+            tr {
+                width: 100%;
+                height: 18px;
+                margin-bottom: 2px;
+                td {
+                    margin-right: 2px;
+                    width: 18px !important;
+                    height: 18px !important;
+                    min-width: 18px !important;
+                    min-height: 18px !important;
+                    // TODO: compare graph design with the following
+                    // box-shadow: 3px 3px 3px rgba(0 0 0 / .1);
+                }
+            } 
+        }
+    }
+}
+// tooltip cell hover to display date and contribution count)
+.tooltip {
+    position: relative;
+    .tooltip-description {
+        width: 140px;
+        position: absolute;
+        left: 0;
+        bottom: 50%;
+        transform: translateX(-90%);
+        padding: 4px;
+        border-radius: 10px;
+        background-color: #666;
+        font-size: 0.75rem;
+        color: #fff;
+        // font-weight: bold;
+        text-align: center;
+        visibility: hidden;
+        opacity: 0;
+        z-index: 1;
+        transition: 0.2s all;
+        pointer-events: none;
+    }
+    &:hover .tooltip-description {
+        bottom: 80%;
+        visibility: visible;
+        opacity: .6;
+    }
+}
 
 
 
@@ -22,12 +147,11 @@ h1 {
     align-items: flex-start;
     justify-content: center;
     column-gap: 4rem;
-    margin: 4rem auto 0;
+    margin: 2rem auto 16rem;
     
     .flex-wrapper {
         display: flex;
         flex-direction: column;
-        column-gap: 4rem;
         margin-bottom: 1rem;
         .item {
             height: 1rem;
@@ -68,41 +192,25 @@ h1 {
 }
 
 
-#result {
-    display: flex;
-    flex-direction: column;
+
+footer {
     align-items: center;
-    margin-top: 4rem;
-    .total {
-        font-size: 1.5rem;
-        margin: 1rem 0;
-    }
-    .period {
-        font-size: 1rem;
-        margin: 1rem 0;
-    }
-    .table-wrapper {
-        overflow-x: auto;
-        width: 95%;
-        table {
-            margin: 1rem auto;
-            table-layout: fixed;
-            tr {
-                width: 100%;
-                height: 18px;
-                margin-bottom: 2px;
-                td {
-                    margin-right: 2px;
-                    width: 18px !important;
-                    height: 18px !important;
-                    min-width: 18px !important;
-                    min-height: 18px !important;
-                    // TODO: compare graph design with the following
-                    // box-shadow: 1px 1px 2px rgba(0 0 0 / .1);
-                }
-            } 
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    .link-wrapper {
+        width: 280px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        a {
+            color: rgb(0, 0, 255);
+            text-decoration: none;
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 }
-
-
