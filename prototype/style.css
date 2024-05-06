@@ -1,48 +1,145 @@
+@charset "UTF-8";
 body {
   text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  font-family: Calibri、Candara、Segoe、Segoe UI、Optima、Arial、sans-serif;
+}
+
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 1.6rem;
+  font-weight: normal;
 }
 
 .color-description-wrapper {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: flex-start;
-  -moz-column-gap: 2rem;
-       column-gap: 2rem;
-  row-gap: 1rem;
+  align-items: flex-start;
+  justify-content: center;
+  -moz-column-gap: 4rem;
+       column-gap: 4rem;
+  margin: 4rem auto 0;
 }
 .color-description-wrapper .flex-wrapper {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  -moz-column-gap: 4rem;
+       column-gap: 4rem;
+  margin-bottom: 1rem;
+}
+.color-description-wrapper .flex-wrapper .item {
   height: 1rem;
-  gap: 1rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
 }
-.color-description-wrapper .flex-wrapper p {
-  position: relative;
-}
-.color-description-wrapper .flex-wrapper p::before {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
+.color-description-wrapper .flex-wrapper .item span {
+  display: inline-block;
   width: 1rem;
   height: 1rem;
-  background: gray;
+  transform: translateY(2px);
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+}
+.color-description-wrapper .flex-wrapper .item p {
+  display: inline-block;
+  width: 4rem;
+}
+.color-description-wrapper .flex-wrapper:nth-child(1) > .item span {
+  background: rgb(0, 255, 0);
+}
+.color-description-wrapper .flex-wrapper:nth-child(1) > .item:nth-child(1) > span {
+  opacity: 0.3333333333;
+}
+.color-description-wrapper .flex-wrapper:nth-child(1) > .item:nth-child(2) > span {
+  opacity: 0.6666666667;
+}
+.color-description-wrapper .flex-wrapper:nth-child(1) > .item:nth-child(3) > span {
+  opacity: 1;
+}
+.color-description-wrapper .flex-wrapper:nth-child(2) > .item span {
+  background: rgb(255, 255, 0);
+}
+.color-description-wrapper .flex-wrapper:nth-child(2) > .item:nth-child(1) > span {
+  opacity: 0.3333333333;
+}
+.color-description-wrapper .flex-wrapper:nth-child(2) > .item:nth-child(2) > span {
+  opacity: 0.6666666667;
+}
+.color-description-wrapper .flex-wrapper:nth-child(2) > .item:nth-child(3) > span {
+  opacity: 1;
+}
+.color-description-wrapper .flex-wrapper:nth-child(3) > .item span {
+  background: rgb(255, 165, 0);
+}
+.color-description-wrapper .flex-wrapper:nth-child(3) > .item:nth-child(1) > span {
+  opacity: 0.3333333333;
+}
+.color-description-wrapper .flex-wrapper:nth-child(3) > .item:nth-child(2) > span {
+  opacity: 0.6666666667;
+}
+.color-description-wrapper .flex-wrapper:nth-child(3) > .item:nth-child(3) > span {
+  opacity: 1;
+}
+.color-description-wrapper .flex-wrapper:nth-child(4) > .item span {
+  background: rgb(255, 0, 0);
+}
+.color-description-wrapper .flex-wrapper:nth-child(4) > .item:nth-child(1) > span {
+  opacity: 0.3333333333;
+}
+.color-description-wrapper .flex-wrapper:nth-child(4) > .item:nth-child(2) > span {
+  opacity: 0.6666666667;
+}
+.color-description-wrapper .flex-wrapper:nth-child(4) > .item:nth-child(3) > span {
+  opacity: 1;
+}
+.color-description-wrapper .flex-wrapper:nth-child(5) > .item span {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.8), rgba(255, 0, 255, 0.8), rgba(255, 255, 0, 0.8));
+}
+.color-description-wrapper .flex-wrapper:nth-child(5) > .item:nth-child(1) > span {
+  opacity: 0.3333333333;
+}
+.color-description-wrapper .flex-wrapper:nth-child(5) > .item:nth-child(2) > span {
+  opacity: 0.6666666667;
+}
+.color-description-wrapper .flex-wrapper:nth-child(5) > .item:nth-child(3) > span {
+  opacity: 1;
 }
 
-#result .total {
-  font-size: 1.5em;
-  margin: 1em 0;
-}
-#result table {
+#result {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 4rem;
 }
-#result table tr {
+#result .total {
+  font-size: 1.5rem;
+  margin: 1rem 0;
+}
+#result .period {
+  font-size: 1rem;
+  margin: 1rem 0;
+}
+#result .table-wrapper {
+  overflow-x: auto;
+  width: 95%;
+}
+#result .table-wrapper table {
+  margin: 1rem auto;
+  table-layout: fixed;
+}
+#result .table-wrapper table tr {
+  width: 100%;
+  height: 18px;
   margin-bottom: 2px;
 }
-#result table tr td {
-  display: inline-block;
+#result .table-wrapper table tr td {
   margin-right: 2px;
+  width: 18px !important;
+  height: 18px !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
 }

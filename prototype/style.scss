@@ -1,31 +1,67 @@
 body { 
     text-align: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    font-family: Calibri、Candara、Segoe、Segoe UI、Optima、Arial、sans-serif;
 }
+p {
+    margin: 0;
+}
+h1 {
+    font-size: 1.6rem;
+    font-weight: normal;
+}
+
+
 
 
 .color-description-wrapper {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: flex-start;
-    column-gap: 2rem;
-    row-gap: 1rem;
+    align-items: flex-start;
+    justify-content: center;
+    column-gap: 4rem;
+    margin: 4rem auto 0;
+    
     .flex-wrapper {
         display: flex;
-        justify-content: center;
-        height: 1rem;
-        gap: 1rem;
-        p {
-            position: relative;
-            &::before {
-                content: '';
-                position: absolute;
-                top: 50%;
-                left: 0;
-                // transform: translate(-50%);
+        flex-direction: column;
+        column-gap: 4rem;
+        margin-bottom: 1rem;
+        .item {
+            height: 1rem;
+            margin: 0;
+            margin-bottom: .5rem;
+            span {
+                display: inline-block;
                 width: 1rem;
                 height: 1rem;
-                background: gray;
+                transform: translateY(2px);
+                box-shadow: 1px 1px 5px rgba(0 0 0 / .3);
+            }
+            p {
+                display: inline-block;
+                width: 4rem;
+            }
+        }
+        $colors:
+            rgb(0 255 0),
+            rgb(255 255 0),
+            rgb(255 165 0),
+            rgb(255 0 0),
+            linear-gradient(135deg, rgb(0 255 255 / .8), rgb(255 0 255 / .8), rgb(255 255 0 / .8)),
+        ;
+        @for $i from 1 through length($colors) {
+            &:nth-child(#{$i}) > .item {
+                span {
+                    background: nth($colors, $i);
+                }
+                @for $j from 1 through 3 {
+                    &:nth-child(#{$j}) > span {
+                        opacity: $j / 3;
+                    }
+                }
             }
         }
     }
@@ -33,21 +69,39 @@ body {
 
 
 #result {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 4rem;
     .total {
-        font-size: 1.5em;
-        margin: 1em 0;
+        font-size: 1.5rem;
+        margin: 1rem 0;
     }
-    table {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        tr {
-            margin-bottom: 2px;
-            td {
-                display: inline-block;
-                margin-right: 2px;
-            }
-        } 
+    .period {
+        font-size: 1rem;
+        margin: 1rem 0;
+    }
+    .table-wrapper {
+        overflow-x: auto;
+        width: 95%;
+        table {
+            margin: 1rem auto;
+            table-layout: fixed;
+            tr {
+                width: 100%;
+                height: 18px;
+                margin-bottom: 2px;
+                td {
+                    margin-right: 2px;
+                    width: 18px !important;
+                    height: 18px !important;
+                    min-width: 18px !important;
+                    min-height: 18px !important;
+                    // TODO: compare graph design with the following
+                    // box-shadow: 1px 1px 2px rgba(0 0 0 / .1);
+                }
+            } 
+        }
     }
 }
 

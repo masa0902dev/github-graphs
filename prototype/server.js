@@ -1,14 +1,14 @@
 import express from "express";
 import fetch from "node-fetch";
 import { config } from "dotenv";
-import cors from 'cors'; // 開発環境でのみ使用(3000と5500)
-config();
+config(); // load .env file
+import cors from 'cors'; // only dev environment (3000 vs 5500)
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors({
-    origin: 'http://127.0.0.1:5500' // このオリジンのみ許可
+    origin: 'http://127.0.0.1:5500' // allow only this origin
 }));
 
 
@@ -42,8 +42,6 @@ app.post("/api/contributions", async (req, res) => {
             }
         }
     }`;
-
-    // const variables = JSON.stringify({ userName, from, to });
     const response = await fetch("https://api.github.com/graphql",{
         method: "POST",
         headers: {

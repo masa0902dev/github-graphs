@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>GitHub Contributions</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GitHub Contribution Graphs</title>
 
         <!-- css -->
+        <!-- <link rel="stylesheet" href="destyle.css"> -->
         <link rel="stylesheet" href="style.css">
         <!-- js -->
         <script type="module" src="index.js" defer></script>
     </head>
 
     <body>
-        <h1>GitHub Contribution-Graph</h1>
-        <input type="text" id="username" placeholder="Enter GitHub username" value="masa0902dev">
+        <h1>GitHub Contribution-Graphs</h1>
+        <input type="text" id="username" placeholder="username (id)" autocomplete="username">
         <select id="period">
             <option value="6">6 months</option>
             <option value="12">1 years</option>
@@ -22,31 +23,36 @@
         
         <div class="color-description-wrapper">
             <div class="flex-wrapper">
-                <p>1~4</p>
-                <p>5~9</p>
-                <p>10~14</p>
+                <div class="item"><span></span><p>1~4</p></div>
+                <div class="item"><span></span><p>5~9</p></div>
+                <div class="item"><span></span><p>10~14</p></div>
             </div>
             <div class="flex-wrapper">
-                <p>15~19</p>
-                <p>20~24</p>
-                <p>25~29</p>
+                <div class="item"><span></span><p>15~19</p></div>
+                <div class="item"><span></span><p>20~24</p></div>
+                <div class="item"><span></span><p>25~29</p></div>
             </div>
             <div class="flex-wrapper">
-                <p>30~34</p>
-                <p>35~39</p>
-                <p>40~44</p>
+                <div class="item"><span></span><p>30~34</p></div>
+                <div class="item"><span></span><p>35~39</p></div>
+                <div class="item"><span></span><p>40~44</p></div>
             </div>
             <div class="flex-wrapper">
-                <p>45~49</p>
-                <p>50~54</p>
-                <p>55~59</p>
+                <div class="item"><span></span><p>45~49</p></div>
+                <div class="item"><span></span><p>50~54</p></div>
+                <div class="item"><span></span><p>55~59</p></div>
             </div>
             <div class="flex-wrapper">
-                <p>60~</p>
+                <div class="item" style="display:none;"></div>
+                <div class="item" style="display:none;"></div>
+                <div class="item"><span></span><p>60~</p></div>
             </div>
         </div>
 
         <div id="result">
+            <!-- <p class="total"></p>
+            <p class="period"></p>
+            <div class="table-wrapper"></div> -->
         </div>
 
     </body>
