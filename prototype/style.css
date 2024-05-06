@@ -2,16 +2,47 @@ body {
   text-align: center;
 }
 
+.color-description-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  -moz-column-gap: 2rem;
+       column-gap: 2rem;
+  row-gap: 1rem;
+}
+.color-description-wrapper .flex-wrapper {
+  display: flex;
+  justify-content: center;
+  height: 1rem;
+  gap: 1rem;
+}
+.color-description-wrapper .flex-wrapper p {
+  position: relative;
+}
+.color-description-wrapper .flex-wrapper p::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 1rem;
+  height: 1rem;
+  background: gray;
+}
+
 #result .total {
   font-size: 1.5em;
   margin: 1em 0;
-}
-#result .color-description-wrapper {
-  margin: 1em 0;
-  background: green;
 }
 #result table {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#result table tr {
+  margin-bottom: 2px;
+}
+#result table tr td {
+  display: inline-block;
+  margin-right: 2px;
 }
