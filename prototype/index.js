@@ -52,7 +52,6 @@ function RenderContributionGraph(data, period) {
     
     // make empty table
     const table = document.createElement("table");
-    // TODO: add  period option "this year"
     let numberOfCols = parseInt(period) / 3 * 13 + 1;
     for (let i = 0; i < 7; i++) {
         const row = document.createElement("tr");
