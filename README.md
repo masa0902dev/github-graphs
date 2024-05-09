@@ -1,1 +1,1 @@
-# github-contribution-display
+# Github Contribution Graph
