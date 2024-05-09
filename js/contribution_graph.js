@@ -1,8 +1,10 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    console.log("1");
     await fetchContributions();
 });
 
 async function fetchContributions() {
+
     const userName = document.getElementById("username").value;
     const period = document.getElementById("period").value;
     console.log("fetchContributions()\nuserName:", userName, "\nperiod:", period, "months");
