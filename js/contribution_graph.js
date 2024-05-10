@@ -1,14 +1,12 @@
 document.addEventListener("DOMContentLoaded", async () => {
-    console.log("1");
     await fetchContributions();
 });
 
 async function fetchContributions() {
-
     const userName = document.getElementById("username").value;
     const period = document.getElementById("period").value;
     console.log("fetchContributions()\nuserName:", userName, "\nperiod:", period, "months");
-    // TODO: fix the fetch URL for production environment
+    // PRODUCTION: fix the fetch URL for production environment
     const response = await fetch("http://localhost:3000/api/contributions", {
         method: "POST",
         headers: {
@@ -34,16 +32,16 @@ function RenderContributionGraph(data, period) {
 
     const resultWrapper = document.getElementById("result-wrapper");
     resultWrapper.innerHTML = ""; // clear old data
-    
     const pTotal = document.createElement("p");
     pTotal.className = "total";
     pTotal.textContent = "Total Contributions: " + totalContribution;
     resultWrapper.appendChild(pTotal);
     const pPeriod = document.createElement("p");
     pPeriod.className = "period";
+    const formatOptions = { month: 'short', day: '2-digit', year: 'numeric' };
     const formattedPeriod = [
-        new Date(dates[0]).toLocaleDateString("en-US", { month: 'short', day: '2-digit', year: 'numeric' }),
-        new Date(dates[dates.length - 1]).toLocaleDateString("en-US", { month: 'short', day: '2-digit', year: 'numeric' })
+        new Date(dates[0]).toLocaleDateString("en-US", formatOptions),
+        new Date(dates[dates.length - 1]).toLocaleDateString("en-US", formatOptions),
     ];
     pPeriod.textContent = formattedPeriod[0] + " ~ " + formattedPeriod[1];
     resultWrapper.appendChild(pPeriod);
@@ -89,7 +87,7 @@ function RenderContributionGraph(data, period) {
         tooltipDescription.classList.add("tooltip-description");
         const formatOptions = { weekday: 'short', month: '2-digit', day: '2-digit', year: 'numeric' };
         const formattedDate = new Date(dates[i]).toLocaleDateString("en-US", formatOptions);
-        tooltipDescription.textContent = formattedDate + ": " + contributions[i];
+        tooltipDescription.textContent = formattedDate + " → " + contributions[i];
         cell.appendChild(tooltipDescription);
 
         daysCount++;
