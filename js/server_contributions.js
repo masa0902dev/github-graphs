@@ -1,16 +1,19 @@
 import express from "express";
-import fetch from "node-fetch";
+// import fetch from "node-fetch"; // build-in fetch() is stable in nodeJS-v22 ~
 import { config } from "dotenv";
 import cors from 'cors'; // only dev environment (3000 vs 5500)
-// load .env file 
-// dont use before finish imports. it will not work.
-config();
+import path from 'path';
+
+// load .env file in the root directory
+// __dirname is not available in ES6 modules. Use import.meta (nodeJS-v21.2.0 ~)
+const ENV_PATH = path.join(import.meta.dirname, "../.env");
+config({ path: ENV_PATH });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors({
-    origin: 'http://127.0.0.1:5500' // allow only this origin
+    origin: 'http://127.0.0.1:5500'
 }));
 
 
