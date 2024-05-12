@@ -1,25 +1,18 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    await fetchContributions();
-});
+const button = document.getElementById("count-contribution");
+const inputName = document.getElementById("username");
+const inputPeriod = document.getElementById("period");
+inputName.addEventListener("keydown", clickButton);
+inputPeriod.addEventListener("keydown", clickButton);
+// click button when Enter key is pressed in username and period input
+function clickButton(e) {
+    if (e.key === "Enter") {
+        button.dispatchEvent(new PointerEvent("click"));
+        e.preventDefault();
+    }
+};
 
-async function fetchContributions() {
-    const userName = document.getElementById("username").value;
-    const period = document.getElementById("period").value;
-    console.log("fetchContributions()\nuserName:", userName, "\nperiod:", period, "months");
-    // PRODUCTION: fix the fetch URL for production environment
-    const response = await fetch("http://localhost:3000/api/contributions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ userName, period }),
-    });
-    const data = await response.json();
-    RenderContributionGraph(data, period);
-}
-
-function RenderContributionGraph(data, period) {
-    console.log("RenderContributionGraph()\ndata:", data, "\nperiod:", period);
+export function RenderContributionGraph(data, period) {
+    console.log("RenderContributionGraph() - user", "\ndata:", data, "\nperiod:", period);
     if (data.errors) {
         alert("Github GraphQL API message:\n\n" + data.errors[0].message);
         return;
@@ -50,9 +43,11 @@ function RenderContributionGraph(data, period) {
     pName.textContent = inputName.value;
     resultWrapper.appendChild(pName);
     
-    // make empty table
+    
+    // 1. make empty table
+    const numberOfCols = weeks.length;
+    console.log('numberOfCols:', numberOfCols);
     const table = document.createElement("table");
-    let numberOfCols = parseInt(period) / 3 * 13 + 1;
     for (let i = 0; i < 7; i++) {
         const row = document.createElement("tr");
         for (let j = 0; j < numberOfCols; j++) {
@@ -67,7 +62,7 @@ function RenderContributionGraph(data, period) {
     resultWrapper.appendChild(tableWrapper)
     tableWrapper.appendChild(table);
 
-    // 1. check and fill the lack of days in the first week
+    // 2. fill the lack of days in the first week
     const firstDay = new Date(dates[0]).getDay();
     let daysCount = firstDay;
     let weekCount = 0;
@@ -75,7 +70,7 @@ function RenderContributionGraph(data, period) {
         let cell = table.rows[i].cells[0];
         cell.style.background = getColor(0);
     }
-    // 2. fill the table
+    // 3. fill the table
     for (let i = 0; i < dates.length; i++) {
         const dateInstance = new Date(dates[i]);
         const day = dateInstance.getDay();
@@ -96,10 +91,12 @@ function RenderContributionGraph(data, period) {
             daysCount = 0;
         }
     }
-    // 3. fill the lack of days in the last week
+    // 4. fill the lack of days in the last week
     for (let i = daysCount; i < 7; i++) {
         let cell = table.rows[i].cells[weekCount];
-        cell.style.background = getColor(0);
+        if (cell !== undefined) {
+            cell.style.background = getColor(0);
+        }
     }
 }
 
@@ -141,18 +138,4 @@ function getColor(number) {
 
 
 
-const button = document.getElementById("count-contribution");
-const inputName = document.getElementById("username");
-const inputPeriod = document.getElementById("period");
-button.addEventListener("click", fetchContributions);
-inputName.addEventListener("keydown", clickButton);
-inputPeriod.addEventListener("keydown", clickButton);
-// click button when Enter key is pressed in username and period input
-function clickButton(e) {
-if (e.key === "Enter") {
-    button.dispatchEvent(new PointerEvent("click"));
-    e.preventDefault();
-}
-};
-// focus on the username input when the page is loaded
-inputName.focus();
+

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>GitHub User Contribution Graphs</title>
+
+        <!-- css -->
+        <!-- <link rel="stylesheet" href="css/destyle.css"> --> <!--dont use in prototype-->
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/contribution_graph.css">
+        <!-- js -->
+        <script type="module" src="../js/fetch_user_contribution.js" defer></script>
+        <script type="module" src="../js/render_contribution_graph.js" defer></script>
+    </head>
+
+    <body>
+        <main>
+            <h1>GitHub User Contribution Graphs</h1>
+            <div class="input-wrapper">
+                <input type="text" id="username" value="masa0902dev" placeholder="username (id)" autocomplete="username">
+                <select id="period">
+                    <option value="3">3 months</option>
+                    <option value="6" selected>6 months</option>
+                    <option value="9">9 months</option>
+                    <option value="12">1 years</option>
+                </select>
+                <input type="button" id="count-contribution" value="Get Contributions">
+            </div>
+            
+            <div id="result-wrapper">
+                <!-- <p class="total"></p>
+                <p class="username"></p>
+                <p class="period"></p>
+                <div class="table-wrapper"></div> -->
+            </div>
+
+            <div class="color-description-wrapper">
+                <div class="flex-wrapper">
+                    <div class="item"><span></span><p>1~3</p></div>
+                    <div class="item"><span></span><p>4~6</p></div>
+                    <div class="item"><span></span><p>7~9</p></div>
+                </div>
+                <div class="flex-wrapper">
+                    <div class="item"><span></span><p>10~13</p></div>
+                    <div class="item"><span></span><p>14~16</p></div>
+                    <div class="item"><span></span><p>17~19</p></div>
+                </div>
+                <div class="flex-wrapper">
+                    <div class="item"><span></span><p>20~24</p></div>
+                    <div class="item"><span></span><p>25~29</p></div>
+                    <div class="item"><span></span><p>30~34</p></div>
+                </div>
+                <div class="flex-wrapper">
+                    <div class="item"><span></span><p>35~39</p></div>
+                    <div class="item"><span></span><p>40~44</p></div>
+                    <div class="item"><span></span><p>45~49</p></div>
+                </div>
+                <div class="flex-wrapper">
+                    <div class="item" style="display:none;"></div>
+                    <div class="item" style="display:none;"></div>
+                    <div class="item"><span></span><p>50~</p></div>
+                </div>
+            </div>
+        </main>
+
+
+        <footer>
+            <div class="link-wrapper">
+                <p>Github: <a href="https://github.com/masa0902dev/github-contribution-graphs">github-contribution-graphs</a></p>
+                <p>Author: <a href="https://masa0902dev.notion.site/Tech-Blog-MASA-0f225d11627944d692699daf0686cd9e">masa0902dev</a></p>
+            </div>
+        </footer>
+
+    </body>
+</html>

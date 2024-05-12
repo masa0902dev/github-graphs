@@ -1,24 +1,3 @@
-* { // now dont use destyle.css
-    margin: 0;
-    padding: 0;
-}
-
-body { 
-    position: relative;
-    text-align: center;
-    // XXX: footer item will be fixed at the bottom by this 1px
-    padding: 2rem .6rem 1px;
-    margin: 0;
-    overflow-x: hidden;
-    font-family: Calibri、Candara、Segoe、Segoe UI、Optima、Arial、sans-serif !important;
-}
-h1 {
-    font-size: 1.4rem;
-    font-weight: normal;
-    letter-spacing: -1px;
-}
-
-
 .input-wrapper {
     margin-top: 1rem;
     #username {
@@ -114,7 +93,7 @@ h1 {
 .tooltip {
     position: relative;
     .tooltip-description {
-        width: 140px;
+        width: 148px;
         position: absolute;
         left: 0;
         bottom: 50%;
@@ -148,7 +127,7 @@ h1 {
     align-items: flex-start;
     justify-content: center;
     column-gap: 4rem;
-    margin: 2rem auto 16rem;
+    margin: 2rem auto 0;
     
     .flex-wrapper {
         display: flex;
@@ -188,30 +167,6 @@ h1 {
                         opacity: $j / 3;
                     }
                 }
-            }
-        }
-    }
-}
-
-
-
-footer {
-    align-items: center;
-    position: absolute;
-    bottom: 1rem;
-    left: 50%;
-    transform: translateX(-50%);
-    .link-wrapper {
-        width: 280px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        a {
-            color: rgb(0, 0, 255);
-            text-decoration: none;
-            &:hover {
-                text-decoration: underline;
             }
         }
     }
