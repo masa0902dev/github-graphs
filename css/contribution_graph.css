@@ -1,24 +1,3 @@
-@charset "UTF-8";
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  position: relative;
-  text-align: center;
-  padding: 2rem 0.6rem 1px;
-  margin: 0;
-  overflow-x: hidden;
-  font-family: Calibri、Candara、Segoe、Segoe UI、Optima、Arial、sans-serif !important;
-}
-
-h1 {
-  font-size: 1.4rem;
-  font-weight: normal;
-  letter-spacing: -1px;
-}
-
 .input-wrapper {
   margin-top: 1rem;
 }
@@ -108,7 +87,7 @@ h1 {
   position: relative;
 }
 .tooltip .tooltip-description {
-  width: 140px;
+  width: 148px;
   position: absolute;
   left: 0;
   bottom: 50%;
@@ -139,7 +118,7 @@ h1 {
   justify-content: center;
   -moz-column-gap: 4rem;
        column-gap: 4rem;
-  margin: 2rem auto 16rem;
+  margin: 2rem auto 0;
 }
 .color-description-wrapper .flex-wrapper {
   display: flex;
@@ -221,26 +200,4 @@ h1 {
 }
 .color-description-wrapper .flex-wrapper:nth-child(5) > .item:nth-child(3) > span {
   opacity: 1;
-}
-
-footer {
-  align-items: center;
-  position: absolute;
-  bottom: 1rem;
-  left: 50%;
-  transform: translateX(-50%);
-}
-footer .link-wrapper {
-  width: 280px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-footer .link-wrapper a {
-  color: rgb(0, 0, 255);
-  text-decoration: none;
-}
-footer .link-wrapper a:hover {
-  text-decoration: underline;
 }

@@ -21,13 +21,15 @@ const TOKEN = process.env.GITHUB_TOKEN;
 
 
 app.post("/api/contributions", async (req, res) => {
-    const { userName, period } = req.body;
-    const today = new Date();
+    const { username, period } = req.body;
+    let today = new Date();
+    // let today = new Date(todaytmp)
+    // today.setDate(today.getDate() - 1);
     const toDate = today.toISOString();
     const fromDate = new Date(today.setMonth(today.getMonth() - period)).toISOString();
 
-    const queryVariables = {
-        login: userName,
+    const variables = {
+        login: username,
         from: fromDate,
         to: toDate,
     };
@@ -35,8 +37,8 @@ app.post("/api/contributions", async (req, res) => {
     query GetUserContributions($login: String!, $from: DateTime!, $to: DateTime!) {
         user(login: $login) {
             contributionsCollection(from: $from, to: $to) {
-            contributionCalendar {
-                totalContributions
+                contributionCalendar {
+                    totalContributions
                     weeks {
                         contributionDays {
                             contributionCount
@@ -53,7 +55,7 @@ app.post("/api/contributions", async (req, res) => {
             "Content-Type": "application/json",
             Authorization: "Bearer " + TOKEN,
         },
-        body: JSON.stringify({ query, variables: queryVariables }),
+        body: JSON.stringify({ query, variables: variables }),
     });
     const data = await response.json();
     res.send(data);
