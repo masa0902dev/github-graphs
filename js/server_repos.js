@@ -13,49 +13,46 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(cors({
-    origin: 'http://127.0.0.1:5500' 
+    origin: 'http://127.0.0.1:5500'
 }));
 
 
 const TOKEN = process.env.GITHUB_TOKEN;
 
 
-app.post("/api/contributions", async (req, res) => {
-    const { userName, period } = req.body;
-    const today = new Date();
-    const toDate = today.toISOString();
-    const fromDate = new Date(today.setMonth(today.getMonth() - period)).toISOString();
+app.post("/api/repos", async (req, res) => {
+    console.log(TOKEN);
 
-    const queryVariables = {
-        login: userName,
-        from: fromDate,
-        to: toDate,
+    const variables = {
+        organization: "hirata-heatstroke",
+        repo: "Puppeteer-Test",
+        branch: "main",
+        directory: "Aichi",
+        file: "weelky_2024.csv",
     };
+    variables.expression = `${variables.branch}:${variables.directory}/${variables.file}`;
+
     const query = `
-    query GetUserContributions($login: String!, $from: DateTime!, $to: DateTime!) {
-        user(login: $login) {
-            contributionsCollection(from: $from, to: $to) {
-            contributionCalendar {
-                totalContributions
-                    weeks {
-                        contributionDays {
-                            contributionCount
-                            date
-                        }
-                    }
+    query getOrgRepoFile($organization: String!, $repo: String!, $expression: String!) {
+        repository(owner: $organization, name: $repo) {
+            object(expression: $expression) {
+                ... on Blob {
+                    text
                 }
             }
         }
     }`;
+
     const response = await fetch("https://api.github.com/graphql",{
         method: "POST",
         headers: {
             "Content-Type": "application/json",
             Authorization: "Bearer " + TOKEN,
         },
-        body: JSON.stringify({ query, variables: queryVariables }),
+        body: JSON.stringify({ query, variables: variables }),
     });
     const data = await response.json();
+    console.log(data);
     res.send(data);
 });
 
