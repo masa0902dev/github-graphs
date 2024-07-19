@@ -23,8 +23,6 @@ const TOKEN = process.env.GITHUB_TOKEN;
 app.post("/api/contributions", async (req, res) => {
     const { username, period } = req.body;
     let today = new Date();
-    // let today = new Date(todaytmp)
-    // today.setDate(today.getDate() - 1);
     const toDate = today.toISOString();
     const fromDate = new Date(today.setMonth(today.getMonth() - period)).toISOString();
 

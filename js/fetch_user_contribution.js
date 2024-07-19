@@ -8,8 +8,9 @@ async function fetchContributions() {
     const username = document.getElementById("username").value;
     const period = document.getElementById("period").value;
     console.log("fetchContributions() - user", "\nusername:", username, "\nperiod:", period, "months");
-    // PRODUCTION: fix the fetch URL for production environment
-    const response = await fetch("http://localhost:3000/api/contributions", {
+    // DEV: http://localhost:3000/api/contributions
+    // const response = await fetch("http://localhost:3000/api/contributions", {
+    const response = await fetch("https://github-contribution-graphs.vercel.app/api/contributions", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
