@@ -2,7 +2,7 @@
   "name": "github-api",
   "version": "1.0.0",
   "description": "",
-  "main": "./js/server_user_contribution.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
