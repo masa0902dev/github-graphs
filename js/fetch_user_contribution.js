@@ -1,6 +1,6 @@
 import { RenderContributionGraph } from "./render_contribution_graph.js";
 
-document.addEventListener("DOMContentLoaded", async () => {
+window.onload = (async () => {
     await fetchContributions();
 });
 
@@ -10,7 +10,7 @@ async function fetchContributions() {
     console.log("fetchContributions() - user", "\nusername:", username, "\nperiod:", period, "months");
     // DEV: http://localhost:3000/api/contributions
     // const response = await fetch("http://localhost:3000/api/contributions", {
-    const response = await fetch("https://github-contribution-graphs.vercel.app/api/contributions", {
+    const response = await fetch("/api/contributions", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
