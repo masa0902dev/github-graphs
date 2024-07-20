@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 // import fetch from "node-fetch"; // build-in fetch() is stable in nodeJS-v22 ~
 import { config } from "dotenv";
 import cors from 'cors'; // only dev environment (3000 vs 5500)
@@ -20,7 +20,7 @@ app.use(cors({
 const TOKEN = process.env.GITHUB_TOKEN;
 
 
-app.post("/api/contributions", async (req, res) => {
+app.post("/api/contributions", async (req: Request, res: Response) => {
     const { username, period } = req.body;
     let today = new Date();
     const toDate = today.toISOString();
