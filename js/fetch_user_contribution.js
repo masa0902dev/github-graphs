@@ -18,6 +18,7 @@ async function fetchContributions() {
         body: JSON.stringify({ username, period }),
     });
     const data = await response.json();
+    console.log("fetch_user_contribution.js: POSTed");
     RenderContributionGraph(data, period);
 }
 
